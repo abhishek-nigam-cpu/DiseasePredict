@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Prediction</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body style="background:blanchedalmond">
+    <div class="login">
+        <h1>Heart Disease Prediction</h1>
+
+        <!-- Main Input For Receiving Query to our ML -->
+        <!-- <form action="{{ url_for('predict')}}"method="post">
+        <label >Rate:</label>
+    	<input type="text" name="rate" placeholder="rate" required="required" /><br>
+        <label >Sales in first month:</label>
+        <input type="text" name="sales in first month" placeholder="sales in first month" required="required" /><br>
+		<label >Sales in second month:</label>
+        <input type="text" name="sales in second month" placeholder="sales in second month" required="required" /><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict sales in third month</button>
+    </form> -->
+        <form action="{{ url_for('predicth')}}" method="post">
+            <label for="heartalgos">Prediction Model:</label>
+            <select id="heartalgos" name="algo">
+                <option value="1">KNN classifier</option>
+                <option value="2">Random Forest Classifier</option>
+                <option value="3">Naive Bayes Classifier</option>
+            </select>
+            <label for="">Age</label>
+            <input type="number" id="age" value="" name="age" required="required">
+            <label for="" id="">Gender:</label>
+             <input type="radio" name="gender" value="1">
+             <label for="">Male</label>
+             <input type="radio" id="css" name="gender" value="0">
+             <label for="">Female</label><br>
+            <label for="cpt">Chest pain type:</label>
+            <select id="cpt" name="cpt">
+                <option value="select">Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <!-- <input type="text" value="" name="gender"> -->
+            <label for="" id="">resting Blood Pressure:</label>
+            <input type="text" value="" name="rbp" required="required">
+            <label for="" id="">Cholestrol:</label>
+            <input type="text" value="" name="chlstrl" required="required">
+            <label for="fbs" id="">fasting Blood Sugar:</label>
+            <select id="fbs" name="fbs">
+                <option value="select">Select</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>
+            <label for="recg" id="">Rest ECG:</label>
+            <select id="recg" name="recg">
+                <option value="select">Select</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+            <label for="" id="">Max Heart Rate:</label>
+            <input type="text" value="" name="mhr" required="required">
+            <label for="EIA" id="">Exercised Induced Angina:</label>
+            <select id="EIA" name="EIA">
+                <option value="select">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="" id="">ST Depression:</label>
+            <input type="text" value="" name="std" required="required">
+            <label for="slope" id="">Slope:</label>
+            <select id="slope" name="slope">
+                <option value="select">Select</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <label for="mv" id="">Major Vessels:</label>
+            <select id="mv" name="mv">
+                <option value="select">Select</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <label for="thal" id="">Thalessemia:</label>
+            <select id="thal" name="thal">
+                <option value="select">Select</option>
+                <option value="3">normal</option>
+                <option value="6">fixed defect</option>
+                <option value="7">reversible defect</option>
+            </select>
+            <br>
+            <button type="submit" id="submit">Get Prediction</button>
+        </form>
+        <br>
+        <br>
+        <!-- {{ prediction_text }} -->
+        <h2>Results</h2>
+        <table>
+            <tr>
+                {% for header in headings %}
+                <th>{{header}}</th>
+                {% endfor %}
+            </tr>
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{cell}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liver Disease prediction</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body style="background:blanchedalmond">
+    <div class="login">
+        <h1>Liver Patient Prediction</h1>
+
+        <!-- Main Input For Receiving Query to our ML -->
+        <!-- <form action="{{ url_for('predict')}}"method="post">
+        <label >Rate:</label>
+    	<input type="text" name="rate" placeholder="rate" required="required" /><br>
+        <label >Sales in first month:</label>
+        <input type="text" name="sales in first month" placeholder="sales in first month" required="required" /><br>
+		<label >Sales in second month:</label>
+        <input type="text" name="sales in second month" placeholder="sales in second month" required="required" /><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict sales in third month</button>
+    </form> -->
+        <form action="{{ url_for('predict')}}" method="post">
+            <label for="ILPDalgos">Prediction Model:</label>
+            <select id="ILPDalgos" name="algo">
+                <option value="1">KNN classifier</option>
+                <option value="2">Random Forest Classifier</option>
+            </select>
+            <label for="">Age</label>
+            <input type="number" id="age" value="" name="age" required="required">
+            <label for="" id="">Gender:</label>
+             <input type="radio" name="gender" value="1">
+             <label for="">Male</label>
+             <input type="radio" id="css" name="gender" value="0">
+             <label for="">Female</label><br>
+            <!-- <input type="text" value="" name="gender"> -->
+            <label for="" id="">Total Bilirubin:</label>
+            <input type="text" value="" name="tb" required="required">
+            <label for="" id="">Direct Bilirubin:</label>
+            <input type="text" value="" name="db" required="required">
+            <label for="" id="">Total Proteins:</label>
+            <input type="text" value="" name="tpro" required="required">
+            <label for="" id="">Albumin:</label>
+            <input type="text" value="" name="albumin" required="required">
+            <label for="" id="">AG ratio:</label>
+            <input type="text" value="" name="Ag" required="required">
+            <label for="" id="">SGPT:</label>
+            <input type="text" value="" name="sgpt" required="required">
+            <label for="" id="">SGOT:</label>
+            <input type="text" value="" name="sgot" required="required">
+            <label for="" id="">Alkphos:</label>
+            <input type="text" value="" name="alkphos" required="required">
+            <br>
+            <button type="submit" id="submit">Get Prediction</button>
+        </form>
+        <br>
+        <br>
+        <!-- {{ prediction_text }} -->
+        <h2>Results</h2>
+        <table>
+            <tr>
+                {% for header in headings %}
+                <th>{{header}}</th>
+                {% endfor %}
+            </tr>
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{cell}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</body>
+
+</html>

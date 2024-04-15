@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Detection</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body style="background:blanchedalmond">
+    <div class="login">
+        <h1>Covid Detection</h1>
+
+        <!-- Main Input For Receiving Query to our ML -->
+        <!-- <form action="{{ url_for('predict')}}"method="post">
+        <label >Rate:</label>
+    	<input type="text" name="rate" placeholder="rate" required="required" /><br>
+        <label >Sales in first month:</label>
+        <input type="text" name="sales in first month" placeholder="sales in first month" required="required" /><br>
+		<label >Sales in second month:</label>
+        <input type="text" name="sales in second month" placeholder="sales in second month" required="required" /><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict sales in third month</button>
+    </form> -->
+        <form action="{{ url_for('predCovid')}}" method="post">
+            <label for="covidalgos">Prediction Model:</label>
+            <select id="covidalgo" name="covidalgo">
+                <option value="1">Random Forest Classifier</option>
+                <option value="2">Decision Tree</option>
+                <option value="3">KNN classifier</option>
+            </select>
+            <label for="brth">Breathing Problem:</label>
+            <select id="brth" name="brth" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="fev">Fever:</label>
+            <select id="fev" name="fev" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="cough">Dry Cough:</label>
+            <select id="cough" name="cough" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="Sore">Sore Throat:</label>
+            <select id="Sore" name="Sore" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="HT">Hyper Tension:</label>
+            <select id="HT" name="HT" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="trav">Abroad Travel:</label>
+            <select id="trav" name="trav" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br>
+            <label for="ccp">Contact with covid patient:</label>
+            <select id="ccp" name="ccp" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="ALG">Attended Large Gathering:</label>
+            <select id="ALG" name="ALG" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <label for="VPEP">Visited Public Exposed Places:</label>
+            <select id="VPEP" name="VPEP" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br>
+            <label for="FPEP">Family working in Public Exposed Places:</label>
+            <select id="FPEP" name="FPEP" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <br>
+            <button type="submit" id="submit">Get Prediction</button>
+        </form>
+        <br>
+        <br>
+        <!-- {{ prediction_text }} -->
+        <h2>Results</h2>
+        <table>
+            <tr>
+                {% for header in headings %}
+                <th>{{header}}</th>
+                {% endfor %}
+            </tr>
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{cell}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</body>
+
+</html>
